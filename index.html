@@ -1937,7 +1937,7 @@ function renderBI(){const h=GH||HSP,el=$('#lvlG');if(GT==='ug'||GT==='up')GT='ur
    '<nav class="biband" aria-label="Ámbitos"><div class="biband-top"><span>'+H[h].full+'</span><select aria-label="Centro" data-bisel>'+Object.keys(H).map(k=>'<option value="'+k+'"'+(k===h?' selected':'')+'>'+H[k].name+'</option>').join('')+'</select></div><div class="bitabs">'+tabs+'</div></nav>'+
    (GT==='inicio'?biHome(h):biArea(h,GT))+
    '<p class="bilegend">Borde rojo: fuera de objetivo. Ámbar: riesgo. Sin borde: en objetivo o dato de contexto.</p>'}
-function gvSwitch(){const h=GH||HSP;return '<div class="gvsw" role="group" aria-label="Tipo de vista"><button data-gv="#/g/'+h+'" aria-pressed="'+(GV==='res')+'">Panel</button><button data-gv="#/g/'+h+'/bi" aria-pressed="'+(GV==='bi')+'">Vista BI</button><button data-gv="#/g/'+h+'/cm" aria-pressed="'+(GV==='cm')+'">Situación actual</button></div>'}
+function gvSwitch(){return '';const h=GH||HSP;return '<div class="gvsw" role="group" aria-label="Tipo de vista"><button data-gv="#/g/'+h+'" aria-pressed="'+(GV==='res')+'">Panel</button><button data-gv="#/g/'+h+'/bi" aria-pressed="'+(GV==='bi')+'">Vista BI</button><button data-gv="#/g/'+h+'/cm" aria-pressed="'+(GV==='cm')+'">Situación actual</button></div>'}
 document.addEventListener('click',e=>{const b=e.target.closest('[data-gv]');if(b){location.hash=b.dataset.gv}});
 document.addEventListener('change',e=>{if(e.target.matches&&e.target.matches('[data-bisel]'))location.hash='#/g/'+e.target.value+'/bi/'+GT});
 /* ---------- Situación actual (tercera vista de gerencia) ---------- */
@@ -2052,7 +2052,7 @@ function navSel(){const gm=LV==='g',gsuf=GV==='bi'?'/bi/'+GT:GV==='cm'?'/cm':'',
   $('#modeSel').innerHTML='<button data-mode="op" aria-pressed="'+!gm+'">Operativa</button><button data-mode="g" aria-pressed="'+gm+'">Gerencia</button>';
   $('#centerSel').innerHTML=(gm?Object.keys(H).map(h=>['g/'+h+gsuf,H[h].name]):[['','Ambos centros']].concat(Object.keys(H).map(h=>[h,H[h].name]))).map(x=>'<button data-center="'+x[0]+'" aria-pressed="'+(x[0]===cur)+'">'+x[1]+'</button>').join('')}
 function route(){const gm=location.hash.match(/^#\/g(?:\/(\w+))?(?:\/(bi|cm)(?:\/(\w+))?)?\/?$/);
-  if(gm){GV=gm[2]||'res';GT=gm[3]||'inicio';GH=H[gm[1]]?gm[1]:HSP;setHosp(GH);LV='g';S.view=null;closeDrawer();if($('#modal').classList.contains('on'))closeModal();
+  if(gm){GV='res';if(gm[2]){history.replaceState(null,'','#/g/'+(H[gm[1]]?gm[1]:HSP))}GT=gm[3]||'inicio';GH=H[gm[1]]?gm[1]:HSP;setHosp(GH);LV='g';S.view=null;closeDrawer();if($('#modal').classList.contains('on'))closeModal();
     $('#lvlG').hidden=false;$('#lvl0').hidden=true;$('#lvl1').hidden=true;$('#lvl2').hidden=true;
     $('#hsub').textContent=H[GH].name+(GV==='bi'?', panel de gerencia (vista BI)':GV==='cm'?', situación actual':', panel de gerencia');$('#hsub').title=H[GH].full;
     navSel();renderGer();window.scrollTo(0,0);checkMini();return}
