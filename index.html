@@ -1947,7 +1947,7 @@ function gDetail(h,c){const ks=gAll(c).filter(i=>i.key),cx=gAll(c).filter(i=>!i.
 function gMini(i,s){const a=i.s,w=64,h=18,max=Math.max(...a,i.r[0],1),Y=v=>(h-2-v/max*(h-4)).toFixed(1);
   return '<svg class="gp-sp" viewBox="0 0 '+w+' '+h+'" aria-hidden="true"><line x1="0" x2="'+w+'" y1="'+Y(i.r[0])+'" y2="'+Y(i.r[0])+'" stroke="var(--ink-3)" stroke-dasharray="1 2" stroke-width="1"/><polyline points="'+a.map((v,j)=>(j*w/6).toFixed(1)+','+Y(v)).join(' ')+'" fill="none" stroke="var(--ink-2)" stroke-width="1.4"/><circle cx="'+w+'" cy="'+Y(a[6])+'" r="2.2" class="gdot '+s+'"/></svg>'}
 let gpT=null,gpFor=null;
-function gpShow(card){const h=GH||HSP,c=GD[h].find(x=>x.b===card.dataset.gc);if(!c)return;const p=$('#gpop');gpFor=card;
+function gpShow(card){if(card.classList.contains('gpc'))return;const h=GH||HSP,c=GD[h].find(x=>x.b===card.dataset.gc);if(!c)return;const p=$('#gpop');gpFor=card;
   p.innerHTML=gDetail(h,c);p.hidden=false;const r=card.getBoundingClientRect(),z=parseFloat(document.documentElement.style.zoom)||1,vw=innerWidth/z,pw=p.offsetWidth,ph=p.offsetHeight;
   let left=r.right/z+10;if(left+pw>vw-8)left=r.left/z-pw-10;if(left<8)left=Math.max(8,Math.min(r.left/z,vw-pw-8));
   let top=r.top/z;if(top+ph>innerHeight/z-8)top=Math.max(8,innerHeight/z-ph-8);p.style.left=left+'px';p.style.top=top+'px'}
@@ -2084,7 +2084,7 @@ let GPU=(()=>{try{const q=new URLSearchParams(location.search).get('urgencias');
 function gpAlerts(a,okTxt){if(!a||!a.length)return okTxt?'<p class="gpok">'+okTxt+'</p>':'';
   return '<div class="gpal"><span class="gpal-t">En alerta</span>'+a.map(x=>'<div class="gpa '+x[3]+'"><i aria-hidden="true">!</i><b>'+x[0]+'</b><span><strong>'+x[1]+'</strong><small>'+x[2]+'</small></span></div>').join('')+'</div>'}
 function gpCard(h,gc,oa,name,icon,c,body,wide){if(body==null)return '';const st=gpCardSt(c);
-  return '<article class="gcard3 gpc'+(wide?' wide':'')+'" data-gc="'+gc+'" data-gop="#/'+h+'/'+oa+'" tabindex="0" role="link" aria-label="'+name+': '+GPST[st]+'. Ver detalle">'+
+  return '<article class="gcard3 gpc'+(wide?' wide':'')+'" data-gc="'+gc+'" data-gop="#/'+h+'/'+oa+'" tabindex="0" role="link" title="Ir a la vista operativa" aria-label="'+name+': '+GPST[st]+'. Ir a la vista operativa">'+
    '<header>'+icon+'<div><h3>'+name+'</h3></div><span class="health '+st+'">'+GPST[st]+'</span></header><div class="gpb">'+body+'</div></article>'}
 function renderGP(){const h=GH||HSP,el=$('#lvlG'),P=(GPDEMO==='normal'?PGN:PG)[h],F=GPF==='alert';
   const keys=['qx','hos','cex'],all=[];P.u.forEach(x=>x.c.forEach(k=>all.push(k[2])));keys.forEach(k=>{const c=P[k];(c.t||[]).forEach(x=>all.push(x[3]));(c.a||[]).forEach(x=>all.push(x[3]));if(c.occ)all.push(c.occ[1])});
@@ -2135,7 +2135,7 @@ function renderGP(){const h=GH||HSP,el=$('#lvlG'),P=(GPDEMO==='normal'?PGN:PG)[h
   el.innerHTML='<div class="l1head"><div><h2>Panel de Gerencia, '+H[h].full+'</h2></div>'+gvSwitch()+usw+fsw+(GPDEMO?'<span class="gpdemo">Demostración: escenario '+(GPDEMO==='normal'?'sin alertas':'con alertas')+'</span>':'')+'<span class="stamp" id="stampG">'+new Date().toLocaleString('es-ES',{day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'})+'</span></div>'+
    '<div class="gpsum '+(nb?'bad':nw?'warn':'ok')+'"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l9 16H3z"/><path d="M12 10v4"/><path d="M12 17.5v.01"/></svg><span>'+sum+'</span></div>'+
    (cards?'<div class="gpgrid'+(F?' solo':'')+(GPU==='recorrido'?' gpflujo':'')+'">'+cards+'</div>':'<div class="gpempty"><b>Nada que atender ahora mismo</b><span>Todos los indicadores están en objetivo. Pulsa “Ver todo” para ver el detalle de cada ámbito.</span></div>')+
-   '<p class="g3hint">Rojo: fuera de objetivo · Ámbar: riesgo · Sin color: en objetivo. '+(F?'Mostrando solo lo que está fuera de objetivo o en riesgo.':'Los indicadores condicionales solo aparecen cuando están en alerta.')+(GPU==='recorrido'?' Urgencias se lee de izquierda a derecha siguiendo el recorrido del paciente.':'')+' Pasa el cursor por una tarjeta para ver el desglose.</p>';requestAnimationFrame(gpFit)}
+   '<p class="g3hint">Rojo: fuera de objetivo · Ámbar: riesgo · Sin color: en objetivo. '+(F?'Mostrando solo lo que está fuera de objetivo o en riesgo.':'Los indicadores condicionales solo aparecen cuando están en alerta.')+(GPU==='recorrido'?' Urgencias se lee de izquierda a derecha siguiendo el recorrido del paciente.':'')+' Pulsa una tarjeta para ir a la vista operativa.</p>';requestAnimationFrame(gpFit)}
 function gpFit(){const el=$('#lvlG');if(!el)return;el.style.zoom='';if(LV!=='g')return;
   if(document.body.classList.contains('wall')){const Z=parseFloat(document.documentElement.style.zoom)||1,top=el.getBoundingClientRect().top/Z,need=el.scrollHeight,avail=1080-top-44;
     if(need>avail)el.style.zoom=Math.max(.7,avail/need).toFixed(3);return}
@@ -2155,7 +2155,7 @@ function renderGer(){if(GV==='res'){renderGP();return}if(GV==='bi'){renderBI();r
    '<div class="gcc"><span class="gcc-t">Gestión de alertas del command center</span>'+cc.map(i=>{const st=gSt(i,i.v);return '<div class="gcci '+st+'" title="'+gObj(i)+'"><b>'+gFmt(i.v,i.u)+'</b><span>'+i.l+'</span></div>'}).join('')+'</div><p class="g3hint">Pasa el cursor por una tarjeta para ver todos sus indicadores, o tócala en pantallas táctiles. Gris: en objetivo. Ámbar: riesgo. Rojo: fuera de objetivo.</p>';;
   if(keep){const c=document.querySelector('.gcard3[data-gc="'+keep+'"]');if(c)gpShow(c)}
 }
-document.addEventListener('click',e=>{const c=e.target.closest('[data-gop]');if(!c)return;if(c.classList.contains('gcard3')&&!finePtr()){if(gpFor===c){gpHide();return}gpShow(c);return}location.hash=c.dataset.gop});
+document.addEventListener('click',e=>{const c=e.target.closest('[data-gop]');if(!c)return;if(c.classList.contains('gcard3')&&!c.classList.contains('gpc')&&!finePtr()){if(gpFor===c){gpHide();return}gpShow(c);return}location.hash=c.dataset.gop});
 document.addEventListener('click',e=>{if(gpFor&&!e.target.closest('.gcard3')&&!e.target.closest('#gpop'))gpHide()},true);
 document.addEventListener('keydown',e=>{if((e.key==='Enter'||e.key===' ')&&e.target.dataset&&e.target.dataset.gop){e.preventDefault();location.hash=e.target.dataset.gop}});
 
