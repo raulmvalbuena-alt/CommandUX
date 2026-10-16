@@ -1208,6 +1208,13 @@ body.wall .gpc .gpk small{display:block}
 .gpc .gpu-c small,.gpf-c small{white-space:pre-line}
 .gpusw{align-items:center}
 .gpusw>span{font-size:.8em;font-weight:700;color:var(--ink-2);padding:0 4px 0 8px}
+.gpal2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.gpal2>.gpal-t{grid-column:1/-1}
+.gpc .gpal2 .gpa{padding:8px 10px;gap:8px;align-items:flex-start}
+.gpc .gpal2 .gpa>b{font-size:1.2em}
+.gpal2 .gpa small{line-height:1.25}
+.gpc[data-gc="qx"] .gpk{min-height:0;padding:8px 12px;gap:3px}
+.gpc[data-gc="qx"] .gpk.gpref{padding:10px 12px}
 /* Urgencias por recorrido */
 .gpfw{flex:1;display:flex;overflow-x:auto}
 .gpf{flex:1;display:grid;gap:6px;align-items:stretch;min-width:860px}
@@ -2048,23 +2055,23 @@ function renderCM(){const h=GH||HSP,el=$('#lvlG'),al=cmAll(h),nb=al.filter(a=>a.
 const PG={
  hqs:{
   u:[{n:'Generales',tot:174,c:[['5','esperando 1ª visita','bad'],['11','máx. 22 min','warn'],['102','96 S. trat. · 6 H. dig.','ok'],['18','4 críticos','bad'],['6','RX 2 · LAB 3 · ECO 1','bad']]},{n:'Pediatría',tot:5,c:[['0','','ok'],['0','','ok'],['3','3 S. trat. · 0 H. dig.','ok'],['0','sin críticos','ok'],['1','LAB 1','warn']]},{n:'Ginecología',tot:9,c:[['1','esperando 1ª visita','warn'],['2','máx. 9 min','ok'],['6','6 S. trat. · 0 H. dig.','ok'],['1','sin críticos','ok'],['0','','ok']]},{n:'COT',tot:28,c:[['3','esperando 1ª visita','bad'],['4','máx. 12 min','ok'],['21','19 S. trat. · 2 H. dig.','ok'],['2','1 crítico','warn'],['2','RX 2','warn']]}],
-  qx:{occ:[75,'warn','12 de 16 quirófanos en uso · objetivo ≥ 85 %'],prog:28,fin:8,curso:12,t:[['1','Anulados','de 28 programados','warn'],['2','Urgentes','fuera de programa','ok']],a:[['2 de 8','Checklist KO','cirugías finalizadas sin checklist completo','bad']]},
+  qx:{occ:[75,'warn','12 de 16 quirófanos en uso · objetivo ≥ 85 %'],prog:28,fin:8,curso:12,t:[['1','Anulados','de 28 programados','warn'],['2','Urgentes','fuera de programa','ok'],['3','Inicio con retraso','quirófanos con la 1ª cirugía tarde','warn'],['4','Retraso acumulado','quirófanos que acumulan retraso','bad']],a:[['2 de 8','Checklist KO','finalizadas sin checklist completo','bad'],['1 de 8','C.I. KO','finalizadas sin consentimiento completo','bad']]},
   hos:{occ:[96,'bad','362 de 377 camas operativas · objetivo 85–95 %'],t:[['15','Camas libres','6 limpias','warn'],['22','Pendientes de cama','18 Urgencias + 4 quirófano','bad'],['24','Altas','hoy','ok'],['16','Prealtas','altas previstas','ok'],['18','Ingresos','hoy','ok'],['9','Pend. limpieza','camas libres bloqueadas','warn'],['1','UCI','cama libre · 13 de 14 ocupadas','warn']]},
   cex:{occ:[78,'warn','120 de 154 pacientes · objetivo ≥ 80 %'],t:[['8 min','Tiempo medio de espera','obj. ≤ 15 min','ok'],['2','Inicio con retraso','agendas con la 1ª cita tarde','warn'],['5','Retraso acumulado','agendas que acumulan retraso','warn']]}},
  hugc:{
   u:[{n:'Generales',tot:37,c:[['5','esperando 1ª visita','bad'],['4','máx. 6 min','ok'],['7','6 S. trat. · 1 H. dig.','ok'],['0','sin críticos','ok'],['1','ECO-TAC 1','warn']]},{n:'Pediatría',tot:6,c:[['0','','ok'],['1','máx. 5 min','ok'],['2','2 S. trat. · 0 H. dig.','ok'],['1','sin críticos','ok'],['0','','ok']]},{n:'Ginecología',tot:5,c:[['0','','ok'],['1','máx. 4 min','ok'],['3','3 S. trat. · 0 H. dig.','ok'],['0','sin críticos','ok'],['0','','ok']]},{n:'COT',tot:16,c:[['2','esperando 1ª visita','warn'],['3','máx. 10 min','ok'],['9','8 S. trat. · 1 H. dig.','ok'],['1','1 crítico','warn'],['1','RX 1','warn']]}],
-  qx:{occ:[100,'ok','2 de 2 quirófanos en uso · objetivo ≥ 85 %'],prog:20,fin:5,curso:2,t:[['0','Anulados','de 20 programados','ok'],['2','Urgentes','fuera de programa','ok']],a:[['1 de 5','C.I. KO','cirugías finalizadas sin consentimiento informado completo','bad']]},
+  qx:{occ:[100,'ok','2 de 2 quirófanos en uso · objetivo ≥ 85 %'],prog:20,fin:5,curso:2,t:[['0','Anulados','de 20 programados','ok'],['2','Urgentes','fuera de programa','ok'],['0','Inicio con retraso','quirófanos con la 1ª cirugía tarde','ok'],['1','Retraso acumulado','quirófanos que acumulan retraso','warn']],a:[['1 de 5','C.I. KO','finalizadas sin consentimiento completo','bad']]},
   hos:{occ:[81,'warn','264 de 324 camas operativas · objetivo 85–95 %'],t:[['60','Camas libres','50 limpias','ok'],['0','Pendientes de cama','0 Urgencias + 0 quirófano','ok'],['57','Altas','hoy','ok'],['7','Prealtas','altas previstas','ok'],['31','Ingresos','hoy','ok'],['10','Pend. limpieza','camas libres bloqueadas','bad'],['2','UCI','camas libres · 10 de 12 ocupadas','ok']]},
   cex:{occ:[89,'ok','150 de 168 pacientes · objetivo ≥ 80 %'],t:[['12 min','Tiempo medio de espera','obj. ≤ 15 min','ok'],['0','Inicio con retraso','agendas con la 1ª cita tarde','ok'],['2','Retraso acumulado','agendas que acumulan retraso','warn']]}}};
 const PGN={
  hqs:{
   u:[{n:'Generales',tot:98,c:[['0','','ok'],['4','máx. 8 min','ok'],['61','58 S. trat. · 3 H. dig.','ok'],['3','sin críticos','ok'],['0','','ok']]},{n:'Pediatría',tot:3,c:[['0','','ok'],['1','máx. 3 min','ok'],['2','2 S. trat. · 0 H. dig.','ok'],['0','sin críticos','ok'],['0','','ok']]},{n:'Ginecología',tot:4,c:[['0','','ok'],['0','','ok'],['3','3 S. trat. · 0 H. dig.','ok'],['0','sin críticos','ok'],['0','','ok']]},{n:'COT',tot:15,c:[['0','','ok'],['2','máx. 6 min','ok'],['11','10 S. trat. · 1 H. dig.','ok'],['1','sin críticos','ok'],['0','','ok']]}],
-  qx:{occ:[88,'ok','14 de 16 quirófanos en uso · objetivo ≥ 85 %'],prog:28,fin:14,curso:13,t:[['0','Anulados','de 28 programados','ok'],['1','Urgentes','fuera de programa','ok']],a:[]},
+  qx:{occ:[88,'ok','14 de 16 quirófanos en uso · objetivo ≥ 85 %'],prog:28,fin:14,curso:13,t:[['0','Anulados','de 28 programados','ok'],['1','Urgentes','fuera de programa','ok'],['0','Inicio con retraso','quirófanos con la 1ª cirugía tarde','ok'],['0','Retraso acumulado','quirófanos que acumulan retraso','ok']],a:[]},
   hos:{occ:[89,'ok','336 de 377 camas operativas · objetivo 85–95 %'],t:[['41','Camas libres','38 limpias','ok'],['9','Pendientes de cama','6 Urgencias + 3 quirófano','ok'],['21','Altas','hoy','ok'],['14','Prealtas','altas previstas','ok'],['20','Ingresos','hoy','ok'],['3','Pend. limpieza','camas libres bloqueadas','ok'],['4','UCI','camas libres · 10 de 14 ocupadas','ok']]},
   cex:{occ:[86,'ok','139 de 162 pacientes · objetivo ≥ 80 %'],t:[['6 min','Tiempo medio de espera','obj. ≤ 15 min','ok'],['0','Inicio con retraso','agendas con la 1ª cita tarde','ok'],['0','Retraso acumulado','agendas que acumulan retraso','ok']]}},
  hugc:{
   u:[{n:'Generales',tot:24,c:[['0','','ok'],['2','máx. 4 min','ok'],['18','16 S. trat. · 2 H. dig.','ok'],['1','sin críticos','ok'],['0','','ok']]},{n:'Pediatría',tot:1,c:[['0','','ok'],['0','','ok'],['1','1 S. trat. · 0 H. dig.','ok'],['0','sin críticos','ok'],['0','','ok']]},{n:'Ginecología',tot:3,c:[['0','','ok'],['1','máx. 3 min','ok'],['2','2 S. trat. · 0 H. dig.','ok'],['0','sin críticos','ok'],['0','','ok']]},{n:'COT',tot:11,c:[['0','','ok'],['1','máx. 5 min','ok'],['9','8 S. trat. · 1 H. dig.','ok'],['1','sin críticos','ok'],['0','','ok']]}],
-  qx:{occ:[90,'ok','9 de 10 quirófanos en uso · objetivo ≥ 85 %'],prog:20,fin:9,curso:9,t:[['0','Anulados','de 20 programados','ok'],['1','Urgentes','fuera de programa','ok']],a:[]},
+  qx:{occ:[90,'ok','9 de 10 quirófanos en uso · objetivo ≥ 85 %'],prog:20,fin:9,curso:9,t:[['0','Anulados','de 20 programados','ok'],['1','Urgentes','fuera de programa','ok'],['0','Inicio con retraso','quirófanos con la 1ª cirugía tarde','ok'],['0','Retraso acumulado','quirófanos que acumulan retraso','ok']],a:[]},
   hos:{occ:[88,'ok','285 de 324 camas operativas · objetivo 85–95 %'],t:[['39','Camas libres','35 limpias','ok'],['4','Pendientes de cama','3 Urgencias + 1 quirófano','ok'],['40','Altas','hoy','ok'],['12','Prealtas','altas previstas','ok'],['28','Ingresos','hoy','ok'],['4','Pend. limpieza','camas libres bloqueadas','ok'],['3','UCI','camas libres · 9 de 12 ocupadas','ok']]},
   cex:{occ:[91,'ok','153 de 168 pacientes · objetivo ≥ 80 %'],t:[['7 min','Tiempo medio de espera','obj. ≤ 15 min','ok'],['0','Inicio con retraso','agendas con la 1ª cita tarde','ok'],['0','Retraso acumulado','agendas que acumulan retraso','ok']]}}};
 const GPDEMO=(()=>{try{const v=new URLSearchParams(location.search).get('escenario');return v==='normal'||v==='alertas'?v:null}catch(e){return null}})();
@@ -2080,9 +2087,9 @@ function gpTile(t,span){return gpK(t[1],t[0],t[2],t[3],span?{span:span}:null)}
 function gpNum(o){const m=/^(\d+) de (\d+)/.exec(o[2]);return m?[m[1],m[2]]:[o[0]+' %','']}
 function gpObj(o){const m=/objetivo (.+)$/.exec(o[2]);return m?'obj. '+m[1]:''}
 function gpSub(x){return String(x||'').replace(/ S\. trat\. · /,' S. tratamiento\n').replace(/H\. dig\./,'H. digital')}
-let GPU=(()=>{try{const q=new URLSearchParams(location.search).get('urgencias');if(q==='recorrido'||q==='columnas')return q;return localStorage.getItem('gpu')==='recorrido'?'recorrido':'columnas'}catch(e){return 'columnas'}})();
+const GPU='recorrido'; /* vista de Urgencias elegida: por recorrido del paciente */
 function gpAlerts(a,okTxt){if(!a||!a.length)return okTxt?'<p class="gpok">'+okTxt+'</p>':'';
-  return '<div class="gpal"><span class="gpal-t">En alerta</span>'+a.map(x=>'<div class="gpa '+x[3]+'"><i aria-hidden="true">!</i><b>'+x[0]+'</b><span><strong>'+x[1]+'</strong><small>'+x[2]+'</small></span></div>').join('')+'</div>'}
+  return '<div class="gpal'+(a.length>1?' gpal2':'')+'"><span class="gpal-t">En alerta</span>'+a.map(x=>'<div class="gpa '+x[3]+'"><i aria-hidden="true">!</i><b>'+x[0]+'</b><span><strong>'+x[1]+'</strong><small>'+x[2]+'</small></span></div>').join('')+'</div>'}
 function gpCard(h,gc,oa,name,icon,c,body,wide){if(body==null)return '';const st=gpCardSt(c);
   return '<article class="gcard3 gpc'+(wide?' wide':'')+'" data-gc="'+gc+'" data-gop="#/'+h+'/'+oa+'" tabindex="0" role="link" title="Ir a la vista operativa" aria-label="'+name+': '+GPST[st]+'. Ir a la vista operativa">'+
    '<header>'+icon+'<div><h3>'+name+'</h3></div><span class="health '+st+'">'+GPST[st]+'</span></header><div class="gpb">'+body+'</div></article>'}
@@ -2132,7 +2139,7 @@ function renderGP(){const h=GH||HSP,el=$('#lvlG'),P=(GPDEMO==='normal'?PGN:PG)[h
   const cards=urgCard+qx+hos+cex;
   const fsw='<div class="gvsw" role="group" aria-label="Filtro de indicadores"><button data-gpf="all" aria-pressed="'+!F+'">Ver todo</button><button data-gpf="alert" aria-pressed="'+F+'">Solo alertas</button></div>';
   const usw='<div class="gvsw gpusw" role="group" aria-label="Vista de Urgencias"><span>Urgencias</span><button data-gpu="columnas" aria-pressed="'+(GPU==='columnas')+'" title="Unidades en columnas">Por unidad</button><button data-gpu="recorrido" aria-pressed="'+(GPU==='recorrido')+'" title="Unidades en filas, en el orden del recorrido del paciente">Por recorrido</button></div>';
-  el.innerHTML='<div class="l1head"><div><h2>Panel de Gerencia, '+H[h].full+'</h2></div>'+gvSwitch()+usw+fsw+(GPDEMO?'<span class="gpdemo">Demostración: escenario '+(GPDEMO==='normal'?'sin alertas':'con alertas')+'</span>':'')+'<span class="stamp" id="stampG">'+new Date().toLocaleString('es-ES',{day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'})+'</span></div>'+
+  el.innerHTML='<div class="l1head"><div><h2>Panel de Gerencia, '+H[h].full+'</h2></div>'+gvSwitch()+fsw+(GPDEMO?'<span class="gpdemo">Demostración: escenario '+(GPDEMO==='normal'?'sin alertas':'con alertas')+'</span>':'')+'<span class="stamp" id="stampG">'+new Date().toLocaleString('es-ES',{day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'})+'</span></div>'+
    '<div class="gpsum '+(nb?'bad':nw?'warn':'ok')+'"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l9 16H3z"/><path d="M12 10v4"/><path d="M12 17.5v.01"/></svg><span>'+sum+'</span></div>'+
    (cards?'<div class="gpgrid'+(F?' solo':'')+(GPU==='recorrido'?' gpflujo':'')+'">'+cards+'</div>':'<div class="gpempty"><b>Nada que atender ahora mismo</b><span>Todos los indicadores están en objetivo. Pulsa “Ver todo” para ver el detalle de cada ámbito.</span></div>')+
    '<p class="g3hint">Rojo: fuera de objetivo · Ámbar: riesgo · Sin color: en objetivo. '+(F?'Mostrando solo lo que está fuera de objetivo o en riesgo.':'Los indicadores condicionales solo aparecen cuando están en alerta.')+(GPU==='recorrido'?' Urgencias se lee de izquierda a derecha siguiendo el recorrido del paciente.':'')+' Pulsa una tarjeta para ir a la vista operativa.</p>';requestAnimationFrame(gpFit)}
@@ -2142,7 +2149,6 @@ function gpFit(){const el=$('#lvlG');if(!el)return;el.style.zoom='';if(LV!=='g')
   if(innerWidth<1000)return;
   const r=el.getBoundingClientRect(),avail=innerHeight-r.top-10;if(r.height>avail){el.style.zoom=Math.max(.7,avail/r.height).toFixed(3)}}
 window.addEventListener('resize',()=>{clearTimeout(window.__gpft);window.__gpft=setTimeout(gpFit,120)});
-document.addEventListener('click',e=>{const b=e.target.closest('[data-gpu]');if(!b)return;GPU=b.dataset.gpu;try{localStorage.setItem('gpu',GPU)}catch(x){}renderGP()});
 document.addEventListener('click',e=>{const b=e.target.closest('[data-gpf]');if(!b)return;GPF=b.dataset.gpf;try{localStorage.setItem('gpf',GPF)}catch(x){}renderGP()});
 let GH=null;
 function renderGer(){if(GV==='res'){renderGP();return}if(GV==='bi'){renderBI();return}if(GV==='cm'){renderCM();return}const keep=gpFor&&gpFor.dataset.gc;const h=GH||HSP,el=$('#lvlG'),cards=GD[h],sts=cards.map(gCardSt);
