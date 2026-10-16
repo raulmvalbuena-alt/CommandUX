@@ -2098,19 +2098,19 @@ function renderGP(){const h=GH||HSP,el=$('#lvlG'),P=(GPDEMO==='normal'?PGN:PG)[h
   let ubody='';
   if(us.length&&GPU==='recorrido'){
     /* Propuesta 3: una fila por unidad, columnas en el orden del recorrido del paciente */
-    const FLOW=[1,0,2,3],HL=[['Sin triaje','pacientes'],['Triaje &gt; 30 min','esperan 1ª visita'],['En atención','pacientes'],['Pte. ingreso','pacientes']];
-    const cols=['minmax(0,1.05fr)','minmax(0,.75fr)','minmax(0,1fr)','14px','minmax(0,1fr)','14px','minmax(0,1.15fr)','14px','minmax(0,1fr)'].concat(hasPru?['minmax(0,1fr)']:[]);
+    const FLOW=hasPru?[1,0,2,4,3]:[1,0,2,3],HL={1:['Sin triaje','pacientes'],0:['Triaje &gt; 30 min','esperan 1ª visita'],2:['En atención','pacientes'],4:['Pruebas','solo si alerta'],3:['Pte. ingreso','pacientes']},CW={1:'1fr',0:'1fr',2:'1.15fr',4:'1fr',3:'1fr'};
+    const cols=['minmax(0,1.05fr)','minmax(0,.75fr)'].concat(...FLOW.map((r,j)=>(j?['14px']:[]).concat(['minmax(0,'+CW[r]+')'])));
     const hd=(l,sub,cl)=>'<div role="columnheader" class="gpf-h'+(cl?' '+cl:'')+'"><span>'+l+'</span><small>'+(sub||'&nbsp;')+'</small></div>';
     const cell=k=>'<div role="cell" class="gpf-c '+k[2]+'"><b>'+k[0]+'</b>'+(k[1]?'<small>'+gpSub(k[1])+'</small>':'')+'</div>';
     const arrow='<span class="gpf-a" aria-hidden="true">›</span>';
     ubody='<div class="gpu gpfw"><div class="gpf" role="table" aria-label="Urgencias por unidad, en el orden del recorrido del paciente" style="grid-template-columns:'+cols.join(' ')+';grid-template-rows:auto repeat('+us.length+',minmax(0,1fr))">'+
-      hd('Unidad','estado','gpf-h0')+hd('Pacientes','en el centro','gpf-hp')+[0,1,2,3].map(j=>(j?'<div class="gpf-h gpf-ha" aria-hidden="true"></div>':'')+hd(HL[j][0],HL[j][1])).join('')+(hasPru?hd('Pruebas','solo si alerta'):'')+
-      us.map(i=>{const u=P.u[i];return '<div role="rowheader" class="gpf-n"><i class="'+ust(u)+'" aria-hidden="true"></i><span>'+u.n+'</span></div><div role="cell" class="gpf-t"><b>'+u.tot+'</b></div>'+FLOW.map((r,j)=>(j?arrow:'')+cell(u.c[r])).join('')+(hasPru?cell(u.c[4]):'')}).join('')+
+      hd('Unidad','estado','gpf-h0')+hd('Pacientes','en el centro','gpf-hp')+FLOW.map((r,j)=>(j?'<div class="gpf-h gpf-ha" aria-hidden="true"></div>':'')+hd(HL[r][0],HL[r][1])).join('')+
+      us.map(i=>{const u=P.u[i];return '<div role="rowheader" class="gpf-n"><i class="'+ust(u)+'" aria-hidden="true"></i><span>'+u.n+'</span></div><div role="cell" class="gpf-t"><b>'+u.tot+'</b></div>'+FLOW.map((r,j)=>(j?arrow:'')+cell(u.c[r])).join('')}).join('')+
       '</div></div>'+(!hasPru&&!F?'<p class="gpok">Sin pruebas en alerta en ninguna unidad</p>':'');
   }else if(us.length){
     /* Propuesta 2: unidades en columnas, indicadores en filas */
     const UL=['Con triaje &gt; 30 min','Sin triaje','En atención','Pendientes de ingreso','Pruebas en alerta'];
-    let rows=[0,1,2,3].concat(hasPru?[4]:[]);if(F)rows=rows.filter(r=>us.some(i=>P.u[i].c[r][2]!=='ok'));
+    let rows=hasPru?[0,1,2,4,3]:[0,1,2,3];if(F)rows=rows.filter(r=>us.some(i=>P.u[i].c[r][2]!=='ok'));
     if(rows.length)ubody='<div class="gpu"><div class="gpu-t" style="--n:'+us.length+'" role="table" aria-label="Urgencias por unidad"><div class="gpu-r gpu-h" role="row"><span role="columnheader"></span>'+us.map(i=>'<div role="columnheader" class="'+ust(P.u[i])+'"><b>'+P.u[i].n+'</b><small>'+P.u[i].tot+' pacientes</small></div>').join('')+'</div>'+
       rows.map(r=>'<div class="gpu-r" role="row"><span role="rowheader">'+UL[r]+'</span>'+us.map(i=>{const k=P.u[i].c[r];return '<div role="cell" class="gpu-c '+k[2]+'"><b>'+k[0]+'</b>'+(k[1]?'<small>'+gpSub(k[1])+'</small>':'')+'</div>'}).join('')+'</div>').join('')+'</div></div>'+(!hasPru&&!F?'<p class="gpok">Sin pruebas en alerta en ninguna unidad</p>':'');
   }
