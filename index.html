@@ -788,7 +788,7 @@ body.wall .csel{display:flex}
 .gcci.warn{border-top-color:var(--amber)}.gcci.bad{border-top-color:var(--crit)}
 .gcci b{display:block;font-size:1.35em;font-weight:700}.gcci.warn b{color:var(--amber)}.gcci.bad b{color:var(--crit)}
 .gcci span{display:block;font-size:.8em;color:var(--ink-2)}.gcci small{font-size:.72em;color:var(--ink-3)}
-body.wall #lvlG:not([hidden]){flex:1;min-height:0;display:flex;flex-direction:column}
+body.wall #lvlG:not([hidden]){flex:none;display:flex;flex-direction:column}
 body.wall .gareas{flex:1;min-height:0}
 body.wall .gcard{font-size:1.02em}
 body.wall .gbig{flex:none!important;text-align:left!important;align-items:flex-start!important;padding:16px!important}
@@ -1116,6 +1116,7 @@ body.wall .cmband>header{padding:6px 16px}
 .gpgrid.solo{display:flex;flex-wrap:wrap;align-items:flex-start}
 .gpgrid.solo>.gpc{flex:1 1 300px}
 .gpgrid.solo>.gpc.wide{flex:2 1 620px}
+.gpgrid.solo.gpflujo>.gpc[data-gc="ug"]{flex-basis:100%}
 .gpgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;align-items:stretch}
 .gpc{min-width:0}
 .gpc.wide{grid-column:span 2}
@@ -1156,10 +1157,77 @@ body.wall .cmband>header{padding:6px 16px}
 .gpgo{display:block;padding:10px 16px;border-top:1px solid var(--line);background:var(--surface-2);font-size:.86em;font-weight:700;color:var(--brand-ink);margin-top:auto}
 :root[data-theme="dark"] .gpa>i{color:#06201D}
 body.wall .gpgo{display:none}
-body.wall .gpgrid{flex:1 1 auto;min-height:0;align-content:start}
+body.wall .gpgrid{align-content:start}
 body.wall .gpc .gpb{padding:10px 14px;gap:10px}
 body.wall .gpk small,body.wall .gpocc small{display:none}
 body.wall .gpsum{margin-bottom:12px;padding:9px 16px}
+
+/* Propuesta v2: títulos destacados y casillas simétricas */
+.gpc>header{background:#1E6F67;padding:14px 18px;gap:12px}
+.gpc>header svg{border-radius:10px;width:36px;height:36px}
+.gpc h3{font-size:1.3em;font-weight:900;letter-spacing:.01em;text-transform:uppercase}
+.gpc .health{font-weight:800}
+.gpc .gpb{padding:16px 18px 18px;gap:10px}
+.gpc .gpt{flex:1;gap:10px;grid-auto-rows:minmax(0,1fr)}
+.gpc .gpk{min-height:96px;justify-content:space-between;gap:6px;padding:12px 14px;border-radius:12px;border:1px solid transparent}
+.gpc .gpk span{font-size:.9em;font-weight:800;color:var(--ink);line-height:1.2}
+.gpc .gpk b{font-size:1.9em;font-weight:900;line-height:1}
+.gpc .gpk small{font-size:.76em;color:var(--ink-2)}
+.gpc .gpk.gpref{border-color:var(--brand);background:var(--surface)}
+.gpc .gpa{padding:10px 14px;border-radius:12px}.gpc .gpa>b{font-size:1.4em;font-weight:900}.gpc .gpa strong{font-weight:800}
+.gpc .gpu{flex:1;display:flex}
+.gpc .gpu-t{flex:1;gap:8px}
+.gpc .gpu-r{gap:8px}
+.gpc .gpu-r:not(.gpu-h){flex:1}
+.gpc .gpu-r>span{font-size:.95em;font-weight:800;color:var(--ink)}
+.gpc .gpu-h>div{padding:0 12px 8px;border-bottom-width:4px}
+.gpc .gpu-h b{font-size:1.06em;font-weight:900}.gpc .gpu-h small{font-size:.8em;font-weight:600;color:var(--ink-2)}
+.gpc .gpu-c{justify-content:center;min-height:58px;padding:8px 12px;border-radius:10px}
+.gpc .gpu-c b{font-size:1.6em;font-weight:900;line-height:1}.gpc .gpu-c small{font-size:.74em;color:var(--ink-2)}
+body.wall .gpc .gpk{min-height:0}
+body.wall .gpc .gpk small{display:block}
+/* Diseño final (lienzo, propuestas 2 y 3): casillas compactas y centradas */
+.gpc>header{padding:12px 18px}
+.gpc>header svg{width:34px;height:34px}
+.gpc h3{font-size:1.4em}
+.gpc .gpb{padding:12px 16px 14px;gap:8px}
+.gpc .gpt{gap:8px}
+.gpc .gpk{min-height:76px;justify-content:center;gap:4px;padding:10px 14px}
+.gpc .gpk>span{font-size:.93em;font-weight:800;color:var(--ink);line-height:1.2}
+.gpc .gpk>b{font-size:1.87em;font-weight:900;line-height:1}
+.gpc .gpk>small{font-size:.8em;color:var(--ink-2);line-height:1.25}
+.gpden{font-style:normal;color:var(--ink-3)!important;font-weight:900}
+.gpbr{display:flex;align-items:center;gap:8px}
+.gpbr .gpbar{flex:1;height:6px}
+.gpc .gpk .gpbr>b{font-size:1.07em;font-weight:900;line-height:1;color:var(--ink)}
+.gpc .gpk.warn .gpbr>b{color:var(--amber)}.gpc .gpk.bad .gpbr>b{color:var(--crit)}
+.gpk.warn .gpbr em{background:var(--amber)}.gpk.bad .gpbr em{background:var(--crit)}
+.gpt6{grid-template-columns:repeat(6,minmax(0,1fr))}
+.gpc .gpu-c{min-height:52px;padding:6px 10px}
+.gpc .gpu-c b{font-size:1.6em}
+.gpc .gpu-c small,.gpf-c small{white-space:pre-line}
+.gpusw{align-items:center}
+.gpusw>span{font-size:.8em;font-weight:700;color:var(--ink-2);padding:0 4px 0 8px}
+/* Urgencias por recorrido */
+.gpfw{flex:1;display:flex;overflow-x:auto}
+.gpf{flex:1;display:grid;gap:6px;align-items:stretch;min-width:860px}
+.gpf-h{display:flex;flex-direction:column;gap:2px;padding:0 0 8px 10px;border-bottom:3px solid var(--line);min-width:0}
+.gpf-h0,.gpf-ha{padding-left:0}.gpf-hp{padding-left:11px}
+.gpf-h>span{font-size:.93em;font-weight:900;color:var(--ink);line-height:1.15;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.gpf-h>small{font-size:.73em;font-weight:600;color:var(--ink-2);line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.gpf-n{display:flex;align-items:center;gap:8px;min-width:0}
+.gpf-n>i{width:10px;height:10px;border-radius:50%;flex:none;background:var(--ink-3)}
+.gpf-n>i.warn{background:var(--amber)}.gpf-n>i.bad{background:var(--crit)}
+.gpf-n>span{font-size:1.13em;font-weight:900;color:var(--ink);line-height:1.1}
+.gpf-t{display:flex;align-items:center;padding:0 10px;border-radius:10px;background:var(--surface);border:1px solid var(--brand)}
+.gpf-t b{font-size:1.73em;font-weight:900;line-height:1}
+.gpf-a{display:grid;place-items:center;color:var(--ink-3);font-size:1.07em;font-weight:700}
+.gpf-c{display:flex;flex-direction:column;justify-content:center;gap:2px;padding:6px 10px;border-radius:10px;min-height:52px;background:var(--surface-2);min-width:0}
+.gpf-c.warn{background:var(--amber-soft)}.gpf-c.bad{background:var(--crit-soft)}
+.gpf-c b{font-size:1.6em;font-weight:900;line-height:1}.gpf-c.warn b{color:var(--amber)}.gpf-c.bad b{color:var(--crit)}
+.gpf-c small{font-size:.73em;color:var(--ink-2);line-height:1.3}
+body.wall .gpc .gpk{min-height:0}
+@media (max-width:699px){.gpt6{grid-template-columns:repeat(2,minmax(0,1fr))}.gpt6>.gpk{grid-column:span 1!important}.gpt6>.gpref{grid-column:1/-1!important}.gpusw>span{display:none}}
 </style>
 
 </head>
@@ -1982,31 +2050,37 @@ const PG={
   u:[{n:'Generales',tot:174,c:[['5','esperando 1ª visita','bad'],['11','máx. 22 min','warn'],['102','96 S. trat. · 6 H. dig.','ok'],['18','4 críticos','bad'],['6','RX 2 · LAB 3 · ECO 1','bad']]},{n:'Pediatría',tot:5,c:[['0','','ok'],['0','','ok'],['3','3 S. trat. · 0 H. dig.','ok'],['0','sin críticos','ok'],['1','LAB 1','warn']]},{n:'Ginecología',tot:9,c:[['1','esperando 1ª visita','warn'],['2','máx. 9 min','ok'],['6','6 S. trat. · 0 H. dig.','ok'],['1','sin críticos','ok'],['0','','ok']]},{n:'COT',tot:28,c:[['3','esperando 1ª visita','bad'],['4','máx. 12 min','ok'],['21','19 S. trat. · 2 H. dig.','ok'],['2','1 crítico','warn'],['2','RX 2','warn']]}],
   qx:{occ:[75,'warn','12 de 16 quirófanos en uso · objetivo ≥ 85 %'],prog:28,fin:8,curso:12,t:[['1','Anulados','de 28 programados','warn'],['2','Urgentes','fuera de programa','ok']],a:[['2 de 8','Checklist KO','cirugías finalizadas sin checklist completo','bad']]},
   hos:{occ:[96,'bad','362 de 377 camas operativas · objetivo 85–95 %'],t:[['15','Camas libres','6 limpias','warn'],['22','Pendientes de cama','18 Urgencias + 4 quirófano','bad'],['24','Altas','hoy','ok'],['16','Prealtas','altas previstas','ok'],['18','Ingresos','hoy','ok'],['9','Pend. limpieza','camas libres bloqueadas','warn'],['1','UCI','cama libre · 13 de 14 ocupadas','warn']]},
-  cex:{occ:[78,'warn','120 de 154 pacientes · objetivo ≥ 80 %'],t:[['8 min','Tiempo medio de espera','','ok'],['2','Agendas con retraso','en la 1ª atención crítica','warn']]}},
+  cex:{occ:[78,'warn','120 de 154 pacientes · objetivo ≥ 80 %'],t:[['8 min','Tiempo medio de espera','obj. ≤ 15 min','ok'],['2','Inicio con retraso','agendas con la 1ª cita tarde','warn'],['5','Retraso acumulado','agendas que acumulan retraso','warn']]}},
  hugc:{
   u:[{n:'Generales',tot:37,c:[['5','esperando 1ª visita','bad'],['4','máx. 6 min','ok'],['7','6 S. trat. · 1 H. dig.','ok'],['0','sin críticos','ok'],['1','ECO-TAC 1','warn']]},{n:'Pediatría',tot:6,c:[['0','','ok'],['1','máx. 5 min','ok'],['2','2 S. trat. · 0 H. dig.','ok'],['1','sin críticos','ok'],['0','','ok']]},{n:'Ginecología',tot:5,c:[['0','','ok'],['1','máx. 4 min','ok'],['3','3 S. trat. · 0 H. dig.','ok'],['0','sin críticos','ok'],['0','','ok']]},{n:'COT',tot:16,c:[['2','esperando 1ª visita','warn'],['3','máx. 10 min','ok'],['9','8 S. trat. · 1 H. dig.','ok'],['1','1 crítico','warn'],['1','RX 1','warn']]}],
   qx:{occ:[100,'ok','2 de 2 quirófanos en uso · objetivo ≥ 85 %'],prog:20,fin:5,curso:2,t:[['0','Anulados','de 20 programados','ok'],['2','Urgentes','fuera de programa','ok']],a:[['1 de 5','C.I. KO','cirugías finalizadas sin consentimiento informado completo','bad']]},
   hos:{occ:[81,'warn','264 de 324 camas operativas · objetivo 85–95 %'],t:[['60','Camas libres','50 limpias','ok'],['0','Pendientes de cama','0 Urgencias + 0 quirófano','ok'],['57','Altas','hoy','ok'],['7','Prealtas','altas previstas','ok'],['31','Ingresos','hoy','ok'],['10','Pend. limpieza','camas libres bloqueadas','bad'],['2','UCI','camas libres · 10 de 12 ocupadas','ok']]},
-  cex:{occ:[89,'ok','150 de 168 pacientes · objetivo ≥ 80 %'],t:[['12 min','Tiempo medio de espera','','ok'],['0','Agendas con retraso','en la 1ª atención crítica','ok']]}}};
+  cex:{occ:[89,'ok','150 de 168 pacientes · objetivo ≥ 80 %'],t:[['12 min','Tiempo medio de espera','obj. ≤ 15 min','ok'],['0','Inicio con retraso','agendas con la 1ª cita tarde','ok'],['2','Retraso acumulado','agendas que acumulan retraso','warn']]}}};
 const PGN={
  hqs:{
   u:[{n:'Generales',tot:98,c:[['0','','ok'],['4','máx. 8 min','ok'],['61','58 S. trat. · 3 H. dig.','ok'],['3','sin críticos','ok'],['0','','ok']]},{n:'Pediatría',tot:3,c:[['0','','ok'],['1','máx. 3 min','ok'],['2','2 S. trat. · 0 H. dig.','ok'],['0','sin críticos','ok'],['0','','ok']]},{n:'Ginecología',tot:4,c:[['0','','ok'],['0','','ok'],['3','3 S. trat. · 0 H. dig.','ok'],['0','sin críticos','ok'],['0','','ok']]},{n:'COT',tot:15,c:[['0','','ok'],['2','máx. 6 min','ok'],['11','10 S. trat. · 1 H. dig.','ok'],['1','sin críticos','ok'],['0','','ok']]}],
   qx:{occ:[88,'ok','14 de 16 quirófanos en uso · objetivo ≥ 85 %'],prog:28,fin:14,curso:13,t:[['0','Anulados','de 28 programados','ok'],['1','Urgentes','fuera de programa','ok']],a:[]},
   hos:{occ:[89,'ok','336 de 377 camas operativas · objetivo 85–95 %'],t:[['41','Camas libres','38 limpias','ok'],['9','Pendientes de cama','6 Urgencias + 3 quirófano','ok'],['21','Altas','hoy','ok'],['14','Prealtas','altas previstas','ok'],['20','Ingresos','hoy','ok'],['3','Pend. limpieza','camas libres bloqueadas','ok'],['4','UCI','camas libres · 10 de 14 ocupadas','ok']]},
-  cex:{occ:[86,'ok','139 de 162 pacientes · objetivo ≥ 80 %'],t:[['6 min','Tiempo medio de espera','','ok'],['0','Agendas con retraso','en la 1ª atención crítica','ok']]}},
+  cex:{occ:[86,'ok','139 de 162 pacientes · objetivo ≥ 80 %'],t:[['6 min','Tiempo medio de espera','obj. ≤ 15 min','ok'],['0','Inicio con retraso','agendas con la 1ª cita tarde','ok'],['0','Retraso acumulado','agendas que acumulan retraso','ok']]}},
  hugc:{
   u:[{n:'Generales',tot:24,c:[['0','','ok'],['2','máx. 4 min','ok'],['18','16 S. trat. · 2 H. dig.','ok'],['1','sin críticos','ok'],['0','','ok']]},{n:'Pediatría',tot:1,c:[['0','','ok'],['0','','ok'],['1','1 S. trat. · 0 H. dig.','ok'],['0','sin críticos','ok'],['0','','ok']]},{n:'Ginecología',tot:3,c:[['0','','ok'],['1','máx. 3 min','ok'],['2','2 S. trat. · 0 H. dig.','ok'],['0','sin críticos','ok'],['0','','ok']]},{n:'COT',tot:11,c:[['0','','ok'],['1','máx. 5 min','ok'],['9','8 S. trat. · 1 H. dig.','ok'],['1','sin críticos','ok'],['0','','ok']]}],
   qx:{occ:[90,'ok','9 de 10 quirófanos en uso · objetivo ≥ 85 %'],prog:20,fin:9,curso:9,t:[['0','Anulados','de 20 programados','ok'],['1','Urgentes','fuera de programa','ok']],a:[]},
   hos:{occ:[88,'ok','285 de 324 camas operativas · objetivo 85–95 %'],t:[['39','Camas libres','35 limpias','ok'],['4','Pendientes de cama','3 Urgencias + 1 quirófano','ok'],['40','Altas','hoy','ok'],['12','Prealtas','altas previstas','ok'],['28','Ingresos','hoy','ok'],['4','Pend. limpieza','camas libres bloqueadas','ok'],['3','UCI','camas libres · 9 de 12 ocupadas','ok']]},
-  cex:{occ:[91,'ok','153 de 168 pacientes · objetivo ≥ 80 %'],t:[['7 min','Tiempo medio de espera','','ok'],['0','Agendas con retraso','en la 1ª atención crítica','ok']]}}};
+  cex:{occ:[91,'ok','153 de 168 pacientes · objetivo ≥ 80 %'],t:[['7 min','Tiempo medio de espera','obj. ≤ 15 min','ok'],['0','Inicio con retraso','agendas con la 1ª cita tarde','ok'],['0','Retraso acumulado','agendas que acumulan retraso','ok']]}}};
 const GPDEMO=(()=>{try{const v=new URLSearchParams(location.search).get('escenario');return v==='normal'||v==='alertas'?v:null}catch(e){return null}})();
 let GPF=(()=>{try{return localStorage.getItem('gpf')==='alert'?'alert':'all'}catch(e){return 'all'}})();
 const GPST={ok:'En objetivo',warn:'Riesgo',bad:'Fuera de objetivo'};
 function gpWorst(a){return a.includes('bad')?'bad':a.includes('warn')?'warn':'ok'}
 function gpCardSt(c){return gpWorst([].concat((c.t||[]).map(x=>x[3]),(c.a||[]).map(x=>x[3]),c.occ?[c.occ[1]]:[]))}
-function gpTile(t){return '<div class="gpk '+t[3]+'"><b>'+t[0]+'</b><span>'+t[1]+'</span>'+(t[2]?'<small>'+t[2]+'</small>':'')+'</div>'}
-function gpOccTile(o,l){return '<div class="gpk gpref '+o[1]+'"><span>'+l+'</span><b>'+o[0]+' %</b><i class="gpbar"><em style="width:'+Math.min(100,o[0])+'%"></em></i><small>'+o[2]+'</small></div>'}
-function gpOcc(o,l){return '<div class="gpocc '+o[1]+'"><div class="gpocc-h"><span>'+l+'</span><b>'+o[0]+' %</b></div><i class="gpbar"><em style="width:'+Math.min(100,o[0])+'%"></em></i><small>'+o[2]+'</small></div>'}
+function gpEsc(x){return String(x).replace(/</g,'&lt;')}
+/* casilla compacta: etiqueta → valor (/ denominador neutro) → barra + % → nota */
+function gpK(l,v,sub,st,o){o=o||{};const bar=o.w!=null?'<div class="gpbr"><i class="gpbar"><em style="width:'+Math.min(100,o.w)+'%"></em></i>'+(o.pct?'<b>'+o.pct+'</b>':'')+'</div>':'';
+  return '<div class="gpk '+st+(o.ref?' gpref':'')+'"'+(o.span?' style="grid-column:span '+o.span+'"':'')+'><span>'+l+'</span><b>'+v+(o.den?'<em class="gpden"> / '+o.den+'</em>':'')+'</b>'+bar+'<small>'+(sub||'&nbsp;')+'</small></div>'}
+function gpTile(t,span){return gpK(t[1],t[0],t[2],t[3],span?{span:span}:null)}
+function gpNum(o){const m=/^(\d+) de (\d+)/.exec(o[2]);return m?[m[1],m[2]]:[o[0]+' %','']}
+function gpObj(o){const m=/objetivo (.+)$/.exec(o[2]);return m?'obj. '+m[1]:''}
+function gpSub(x){return String(x||'').replace(/ S\. trat\. · /,' S. tratamiento\n').replace(/H\. dig\./,'H. digital')}
+let GPU=(()=>{try{const q=new URLSearchParams(location.search).get('urgencias');if(q==='recorrido'||q==='columnas')return q;return localStorage.getItem('gpu')==='recorrido'?'recorrido':'columnas'}catch(e){return 'columnas'}})();
 function gpAlerts(a,okTxt){if(!a||!a.length)return okTxt?'<p class="gpok">'+okTxt+'</p>':'';
   return '<div class="gpal"><span class="gpal-t">En alerta</span>'+a.map(x=>'<div class="gpa '+x[3]+'"><i aria-hidden="true">!</i><b>'+x[0]+'</b><span><strong>'+x[1]+'</strong><small>'+x[2]+'</small></span></div>').join('')+'</div>'}
 function gpCard(h,gc,oa,name,icon,c,body,wide){if(body==null)return '';const st=gpCardSt(c);
@@ -2017,35 +2091,58 @@ function renderGP(){const h=GH||HSP,el=$('#lvlG'),P=(GPDEMO==='normal'?PGN:PG)[h
   const nb=all.filter(x=>x==='bad').length,nw=all.filter(x=>x==='warn').length;
   const sum=nb||nw?(nb?nb+(nb===1?' indicador fuera de objetivo':' indicadores fuera de objetivo'):'')+(nb&&nw?' y ':'')+(nw?nw+' en riesgo':'')+' en '+H[h].name:'Sin alertas: todos los ámbitos en objetivo en '+H[h].name;
   const T=ts=>F?ts.filter(x=>x[3]!=='ok'):ts;
-  const tiles=(ts,cls)=>{const v=T(ts);return v.length?'<div class="gpt'+(cls||'')+'">'+v.map(gpTile).join('')+'</div>':''};
-  const UL=['Con triaje > 30 min','Sin triaje','En atención','Pendientes de ingreso','Pruebas en alerta'];
   const ust=x=>gpWorst(x.c.map(k=>k[2]));
   const U={c:{t:[].concat(...P.u.map(x=>x.c.map(k=>[0,0,0,k[2]])))}};
   let us=P.u.map((x,i)=>i);if(F)us=us.filter(i=>ust(P.u[i])!=='ok');
   const hasPru=us.some(i=>P.u[i].c[4][2]!=='ok');
-  let rows=[0,1,2,3].concat(hasPru?[4]:[]);if(F)rows=rows.filter(r=>us.some(i=>P.u[i].c[r][2]!=='ok'));
-  const ubody=us.length&&rows.length?'<div class="gpu"><div class="gpu-t" style="--n:'+us.length+'" role="table" aria-label="Urgencias por unidad"><div class="gpu-r gpu-h" role="row"><span role="columnheader"></span>'+us.map(i=>'<div role="columnheader" class="'+ust(P.u[i])+'"><b>'+P.u[i].n+'</b><small>'+P.u[i].tot+' pacientes</small></div>').join('')+'</div>'+
-    rows.map(r=>'<div class="gpu-r" role="row"><span role="rowheader">'+UL[r]+'</span>'+us.map(i=>{const k=P.u[i].c[r];return '<div role="cell" class="gpu-c '+k[2]+'"><b>'+k[0]+'</b>'+(k[1]?'<small>'+k[1]+'</small>':'')+'</div>'}).join('')+'</div>').join('')+'</div></div>'+(!hasPru&&!F?'<p class="gpok">Sin pruebas en alerta en ninguna unidad</p>':''):'';
+  let ubody='';
+  if(us.length&&GPU==='recorrido'){
+    /* Propuesta 3: una fila por unidad, columnas en el orden del recorrido del paciente */
+    const FLOW=[1,0,2,3],HL=[['Sin triaje','pacientes'],['Triaje &gt; 30 min','esperan 1ª visita'],['En atención','pacientes'],['Pte. ingreso','pacientes']];
+    const cols=['minmax(0,1.05fr)','minmax(0,.75fr)','minmax(0,1fr)','14px','minmax(0,1fr)','14px','minmax(0,1.15fr)','14px','minmax(0,1fr)'].concat(hasPru?['minmax(0,1fr)']:[]);
+    const hd=(l,sub,cl)=>'<div role="columnheader" class="gpf-h'+(cl?' '+cl:'')+'"><span>'+l+'</span><small>'+(sub||'&nbsp;')+'</small></div>';
+    const cell=k=>'<div role="cell" class="gpf-c '+k[2]+'"><b>'+k[0]+'</b>'+(k[1]?'<small>'+gpSub(k[1])+'</small>':'')+'</div>';
+    const arrow='<span class="gpf-a" aria-hidden="true">›</span>';
+    ubody='<div class="gpu gpfw"><div class="gpf" role="table" aria-label="Urgencias por unidad, en el orden del recorrido del paciente" style="grid-template-columns:'+cols.join(' ')+';grid-template-rows:auto repeat('+us.length+',minmax(0,1fr))">'+
+      hd('Unidad','estado','gpf-h0')+hd('Pacientes','en el centro','gpf-hp')+[0,1,2,3].map(j=>(j?'<div class="gpf-h gpf-ha" aria-hidden="true"></div>':'')+hd(HL[j][0],HL[j][1])).join('')+(hasPru?hd('Pruebas','solo si alerta'):'')+
+      us.map(i=>{const u=P.u[i];return '<div role="rowheader" class="gpf-n"><i class="'+ust(u)+'" aria-hidden="true"></i><span>'+u.n+'</span></div><div role="cell" class="gpf-t"><b>'+u.tot+'</b></div>'+FLOW.map((r,j)=>(j?arrow:'')+cell(u.c[r])).join('')+(hasPru?cell(u.c[4]):'')}).join('')+
+      '</div></div>'+(!hasPru&&!F?'<p class="gpok">Sin pruebas en alerta en ninguna unidad</p>':'');
+  }else if(us.length){
+    /* Propuesta 2: unidades en columnas, indicadores en filas */
+    const UL=['Con triaje &gt; 30 min','Sin triaje','En atención','Pendientes de ingreso','Pruebas en alerta'];
+    let rows=[0,1,2,3].concat(hasPru?[4]:[]);if(F)rows=rows.filter(r=>us.some(i=>P.u[i].c[r][2]!=='ok'));
+    if(rows.length)ubody='<div class="gpu"><div class="gpu-t" style="--n:'+us.length+'" role="table" aria-label="Urgencias por unidad"><div class="gpu-r gpu-h" role="row"><span role="columnheader"></span>'+us.map(i=>'<div role="columnheader" class="'+ust(P.u[i])+'"><b>'+P.u[i].n+'</b><small>'+P.u[i].tot+' pacientes</small></div>').join('')+'</div>'+
+      rows.map(r=>'<div class="gpu-r" role="row"><span role="rowheader">'+UL[r]+'</span>'+us.map(i=>{const k=P.u[i].c[r];return '<div role="cell" class="gpu-c '+k[2]+'"><b>'+k[0]+'</b>'+(k[1]?'<small>'+gpSub(k[1])+'</small>':'')+'</div>'}).join('')+'</div>').join('')+'</div></div>'+(!hasPru&&!F?'<p class="gpok">Sin pruebas en alerta en ninguna unidad</p>':'');
+  }
   const urgCard=gpCard(h,'ug','urg','Urgencias',ICON.urg,U.c,F&&!ubody?null:ubody,true);
-  const q=P.qx,pend=q.prog-q.fin-q.curso;
-  const qbody=((!F||q.occ[1]!=='ok')?gpOcc(q.occ,'% ocupación de quirófanos'):'')+
-    (F?'':'<div class="gpprog"><div class="gpprog-h"><b>'+q.fin+'/'+q.prog+'</b><span>finalizadas de las programadas</span></div><i class="gpseg"><em style="width:'+(q.fin/q.prog*100).toFixed(1)+'%"></em><u style="width:'+(q.curso/q.prog*100).toFixed(1)+'%"></u></i>'+
-    '<div class="gpleg"><span><b>'+q.fin+'</b> finalizadas</span><span><b>'+q.curso+'</b> en curso</span><span><b>'+pend+'</b> pendientes</span></div></div>')+
-    tiles(q.t)+gpAlerts(q.a,F?'':'Seguridad quirúrgica: checklist y C.I. sin incidencias');
+  /* Quirófano */
+  const q=P.qx,pend=q.prog-q.fin-q.curso,qn=gpNum(q.occ),fp=Math.round(q.fin/q.prog*100);
+  const qcells=((!F||q.occ[1]!=='ok')?gpK('Quirófanos en uso / operativos',qn[0],'ocupación · '+gpObj(q.occ),q.occ[1],{ref:1,w:q.occ[0],pct:q.occ[0]+' %',den:qn[1]}):'')+
+    (F?'':gpK('Finalizadas / programadas',q.fin,q.curso+' en curso · '+pend+' pendientes','ok',{w:fp,pct:fp+' %',den:q.prog}))+T(q.t).map(t=>gpTile(t)).join('');
+  const qbody=(qcells?'<div class="gpt">'+qcells+'</div>':'')+gpAlerts(q.a,'');
   const qx=gpCard(h,'qx','qx','Quirófano',ICON.qx,q,F&&!qbody?null:qbody);
-  const hs=P.hos,hcells=((!F||hs.occ[1]!=='ok')?gpOccTile(hs.occ,'% ocupación actual'):'')+T(hs.t).map(gpTile).join('');
+  /* Hospitalización: fila 1 ocupación y capacidad, fila 2 flujo de pacientes */
+  const hs=P.hos,hn=gpNum(hs.occ),HO=['Camas libres','Pend. limpieza','UCI','Pendientes de cama','Ingresos','Altas','Prealtas'];
+  const hts=HO.map(l=>hs.t.find(x=>x[1]===l)).filter(Boolean);
+  const hcells=((!F||hs.occ[1]!=='ok')?gpK('Camas ocupadas / operativas',hn[0],'ocupación · '+gpObj(hs.occ),hs.occ[1],{ref:1,w:hs.occ[0],pct:hs.occ[0]+' %',den:hn[1]}):'')+T(hts).map(t=>gpTile(t)).join('');
   const hos=gpCard(h,'hos','hosp','Hospitalización',ICON.hosp,hs,hcells?'<div class="gpt gpt4">'+hcells+'</div>':(F?null:''),true);
-  const cx=P.cex,cbody=((!F||cx.occ[1]!=='ok')?gpOcc(cx.occ,'% atendidos en &lt; 15 min'):'')+tiles(cx.t);
+  /* Consultas Externas */
+  const cx=P.cex,ctv=T(cx.t),ccells=((!F||cx.occ[1]!=='ok')?gpK('% atendidos en &lt; 15 min',cx.occ[0]+' %',cx.occ[2].replace('objetivo','obj.'),cx.occ[1],{ref:1,w:cx.occ[0],span:6}):'')+ctv.map(t=>gpTile(t,ctv.length===3?2:3)).join(''),cbody=ccells?'<div class="gpt gpt6">'+ccells+'</div>':'';
   const cex=gpCard(h,'cex','ce','Consultas Externas',ICON.ce,cx,F&&!cbody?null:cbody);
   const cards=urgCard+qx+hos+cex;
   const fsw='<div class="gvsw" role="group" aria-label="Filtro de indicadores"><button data-gpf="all" aria-pressed="'+!F+'">Ver todo</button><button data-gpf="alert" aria-pressed="'+F+'">Solo alertas</button></div>';
-  el.innerHTML='<div class="l1head"><div><h2>Panel de Gerencia, '+H[h].full+'</h2></div>'+gvSwitch()+fsw+(GPDEMO?'<span class="gpdemo">Demostración: escenario '+(GPDEMO==='normal'?'sin alertas':'con alertas')+'</span>':'')+'<span class="stamp" id="stampG">'+new Date().toLocaleString('es-ES',{day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'})+'</span></div>'+
+  const usw='<div class="gvsw gpusw" role="group" aria-label="Vista de Urgencias"><span>Urgencias</span><button data-gpu="columnas" aria-pressed="'+(GPU==='columnas')+'" title="Unidades en columnas">Por unidad</button><button data-gpu="recorrido" aria-pressed="'+(GPU==='recorrido')+'" title="Unidades en filas, en el orden del recorrido del paciente">Por recorrido</button></div>';
+  el.innerHTML='<div class="l1head"><div><h2>Panel de Gerencia, '+H[h].full+'</h2></div>'+gvSwitch()+usw+fsw+(GPDEMO?'<span class="gpdemo">Demostración: escenario '+(GPDEMO==='normal'?'sin alertas':'con alertas')+'</span>':'')+'<span class="stamp" id="stampG">'+new Date().toLocaleString('es-ES',{day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'})+'</span></div>'+
    '<div class="gpsum '+(nb?'bad':nw?'warn':'ok')+'"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l9 16H3z"/><path d="M12 10v4"/><path d="M12 17.5v.01"/></svg><span>'+sum+'</span></div>'+
-   (cards?'<div class="gpgrid'+(F?' solo':'')+'">'+cards+'</div>':'<div class="gpempty"><b>Nada que atender ahora mismo</b><span>Todos los indicadores están en objetivo. Pulsa “Ver todo” para ver el detalle de cada ámbito.</span></div>')+
-   '<p class="g3hint">Rojo: fuera de objetivo · Ámbar: riesgo · Sin color: en objetivo. '+(F?'Mostrando solo lo que está fuera de objetivo o en riesgo.':'Los indicadores condicionales solo aparecen cuando están en alerta.')+' Pasa el cursor por una tarjeta para ver el desglose.</p>';requestAnimationFrame(gpFit)}
-function gpFit(){const el=$('#lvlG');if(!el)return;el.style.zoom='';if(LV!=='g'||document.body.classList.contains('wall')||innerWidth<1000)return;
+   (cards?'<div class="gpgrid'+(F?' solo':'')+(GPU==='recorrido'?' gpflujo':'')+'">'+cards+'</div>':'<div class="gpempty"><b>Nada que atender ahora mismo</b><span>Todos los indicadores están en objetivo. Pulsa “Ver todo” para ver el detalle de cada ámbito.</span></div>')+
+   '<p class="g3hint">Rojo: fuera de objetivo · Ámbar: riesgo · Sin color: en objetivo. '+(F?'Mostrando solo lo que está fuera de objetivo o en riesgo.':'Los indicadores condicionales solo aparecen cuando están en alerta.')+(GPU==='recorrido'?' Urgencias se lee de izquierda a derecha siguiendo el recorrido del paciente.':'')+' Pasa el cursor por una tarjeta para ver el desglose.</p>';requestAnimationFrame(gpFit)}
+function gpFit(){const el=$('#lvlG');if(!el)return;el.style.zoom='';if(LV!=='g')return;
+  if(document.body.classList.contains('wall')){const Z=parseFloat(document.documentElement.style.zoom)||1,top=el.getBoundingClientRect().top/Z,need=el.scrollHeight,avail=1080-top-44;
+    if(need>avail)el.style.zoom=Math.max(.7,avail/need).toFixed(3);return}
+  if(innerWidth<1000)return;
   const r=el.getBoundingClientRect(),avail=innerHeight-r.top-10;if(r.height>avail){el.style.zoom=Math.max(.7,avail/r.height).toFixed(3)}}
 window.addEventListener('resize',()=>{clearTimeout(window.__gpft);window.__gpft=setTimeout(gpFit,120)});
+document.addEventListener('click',e=>{const b=e.target.closest('[data-gpu]');if(!b)return;GPU=b.dataset.gpu;try{localStorage.setItem('gpu',GPU)}catch(x){}renderGP()});
 document.addEventListener('click',e=>{const b=e.target.closest('[data-gpf]');if(!b)return;GPF=b.dataset.gpf;try{localStorage.setItem('gpf',GPF)}catch(x){}renderGP()});
 let GH=null;
 function renderGer(){if(GV==='res'){renderGP();return}if(GV==='bi'){renderBI();return}if(GV==='cm'){renderCM();return}const keep=gpFor&&gpFor.dataset.gc;const h=GH||HSP,el=$('#lvlG'),cards=GD[h],sts=cards.map(gCardSt);
