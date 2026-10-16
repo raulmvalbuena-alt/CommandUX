@@ -1099,6 +1099,17 @@ body.wall .cmband>header{padding:6px 16px}
 /* Panel de Gerencia (diseño equipo) */
 .gpsum{display:flex;align-items:center;gap:12px;padding:12px 18px;border-radius:14px;font-size:1em;font-weight:700;margin-bottom:16px}
 .gpsum.bad{background:var(--crit-soft);color:var(--crit)}.gpsum.warn{background:var(--amber-soft);color:var(--amber)}.gpsum.ok{background:var(--brand-soft);color:var(--brand-ink)}
+.gpu{overflow-x:auto}
+.gpu-t{display:flex;flex-direction:column;gap:6px;min-width:520px}
+.gpu-r{display:grid;grid-template-columns:minmax(0,1.2fr) repeat(var(--n),minmax(0,1fr));gap:6px;align-items:stretch}
+.gpu-r>span{display:flex;align-items:center;font-size:.82em;font-weight:600;color:var(--ink-2);line-height:1.25}
+.gpu-h>div{display:flex;flex-direction:column;gap:1px;padding:0 10px 6px;border-bottom:3px solid var(--line)}
+.gpu-h>div.warn{border-color:var(--amber)}.gpu-h>div.bad{border-color:var(--crit)}
+.gpu-h b{font-size:.92em;font-weight:800}.gpu-h small{font-size:.74em;color:var(--ink-3)}
+.gpu-c{display:flex;flex-direction:column;gap:1px;padding:7px 10px;border-radius:8px;background:var(--surface-2);min-width:0}
+.gpu-c.warn{background:var(--amber-soft)}.gpu-c.bad{background:var(--crit-soft)}
+.gpu-c b{font-size:1.3em;font-weight:800;line-height:1.1}.gpu-c.warn b{color:var(--amber)}.gpu-c.bad b{color:var(--crit)}
+.gpu-c small{font-size:.7em;color:var(--ink-3);line-height:1.25}
 .gpdemo{padding:5px 12px;border-radius:999px;border:1px dashed var(--ink-3);font-size:.8em;font-weight:700;color:var(--ink-2);background:var(--surface)}
 .gpempty{display:flex;flex-direction:column;gap:6px;align-items:center;text-align:center;padding:48px 20px;border-radius:16px;background:var(--surface);border:1px solid var(--line)}
 .gpempty b{font-size:1.3em;color:var(--brand-ink)}.gpempty span{color:var(--ink-2)}
@@ -1968,27 +1979,23 @@ function renderCM(){const h=GH||HSP,el=$('#lvlG'),al=cmAll(h),nb=al.filter(a=>a.
 /* ---------- Panel de Gerencia (diseño validado con el equipo) ---------- */
 const PG={
  hqs:{
-  ug:{t:[['5','Con triaje > 30 min','esperando 1ª visita','bad'],['11','Sin triaje','máx. 22 min','warn'],['102','En atención','96 S. trat. · 6 H. digital','ok'],['18','Pendientes de ingreso','4 críticos','bad']],a:[['6','Pruebas en alerta','RX 2 · LAB 3 · ECO-TAC 1','bad']]},
-  up:{t:[['0','Con triaje > 30 min','esperando 1ª visita','ok'],['0','Sin triaje','','ok'],['3','En atención','3 S. trat. · 0 H. digital','ok'],['0','Pendientes de ingreso','sin críticos','ok']],a:[['1','Pruebas en alerta','LAB 1','warn']]},
+  u:[{n:'Generales',tot:174,c:[['5','esperando 1ª visita','bad'],['11','máx. 22 min','warn'],['102','96 S. trat. · 6 H. dig.','ok'],['18','4 críticos','bad'],['6','RX 2 · LAB 3 · ECO 1','bad']]},{n:'Pediatría',tot:5,c:[['0','','ok'],['0','','ok'],['3','3 S. trat. · 0 H. dig.','ok'],['0','sin críticos','ok'],['1','LAB 1','warn']]},{n:'Ginecología',tot:9,c:[['1','esperando 1ª visita','warn'],['2','máx. 9 min','ok'],['6','6 S. trat. · 0 H. dig.','ok'],['1','sin críticos','ok'],['0','','ok']]},{n:'COT',tot:28,c:[['3','esperando 1ª visita','bad'],['4','máx. 12 min','ok'],['21','19 S. trat. · 2 H. dig.','ok'],['2','1 crítico','warn'],['2','RX 2','warn']]}],
   qx:{occ:[75,'warn','12 de 16 quirófanos en uso · objetivo ≥ 85 %'],prog:28,fin:8,curso:12,t:[['1','Anulados','de 28 programados','warn'],['2','Urgentes','fuera de programa','ok']],a:[['2 de 8','Checklist KO','cirugías finalizadas sin checklist completo','bad']]},
   hos:{occ:[96,'bad','362 de 377 camas operativas · objetivo 85–95 %'],t:[['15','Camas libres','6 limpias','warn'],['22','Pendientes de cama','18 Urgencias + 4 quirófano','bad'],['24','Altas','hoy','ok'],['16','Prealtas','altas previstas','ok'],['18','Ingresos','hoy','ok'],['9','Pend. limpieza','camas libres bloqueadas','warn'],['1','UCI','cama libre · 13 de 14 ocupadas','warn']]},
   cex:{occ:[78,'warn','120 de 154 pacientes · objetivo ≥ 80 %'],t:[['8 min','Tiempo medio de espera','','ok'],['2','Agendas con retraso','en la 1ª atención crítica','warn']]}},
  hugc:{
-  ug:{t:[['5','Con triaje > 30 min','esperando 1ª visita','bad'],['4','Sin triaje','máx. 6 min','ok'],['7','En atención','6 S. trat. · 1 H. digital','ok'],['0','Pendientes de ingreso','sin críticos','ok']],a:[['1','Pruebas en alerta','ECO-TAC 1','warn']]},
-  up:{t:[['0','Con triaje > 30 min','esperando 1ª visita','ok'],['1','Sin triaje','máx. 5 min','ok'],['2','En atención','2 S. trat. · 0 H. digital','ok'],['1','Pendientes de ingreso','sin críticos','ok']],a:[]},
+  u:[{n:'Generales',tot:37,c:[['5','esperando 1ª visita','bad'],['4','máx. 6 min','ok'],['7','6 S. trat. · 1 H. dig.','ok'],['0','sin críticos','ok'],['1','ECO-TAC 1','warn']]},{n:'Pediatría',tot:6,c:[['0','','ok'],['1','máx. 5 min','ok'],['2','2 S. trat. · 0 H. dig.','ok'],['1','sin críticos','ok'],['0','','ok']]},{n:'Ginecología',tot:5,c:[['0','','ok'],['1','máx. 4 min','ok'],['3','3 S. trat. · 0 H. dig.','ok'],['0','sin críticos','ok'],['0','','ok']]},{n:'COT',tot:16,c:[['2','esperando 1ª visita','warn'],['3','máx. 10 min','ok'],['9','8 S. trat. · 1 H. dig.','ok'],['1','1 crítico','warn'],['1','RX 1','warn']]}],
   qx:{occ:[100,'ok','2 de 2 quirófanos en uso · objetivo ≥ 85 %'],prog:20,fin:5,curso:2,t:[['0','Anulados','de 20 programados','ok'],['2','Urgentes','fuera de programa','ok']],a:[['1 de 5','C.I. KO','cirugías finalizadas sin consentimiento informado completo','bad']]},
   hos:{occ:[81,'warn','264 de 324 camas operativas · objetivo 85–95 %'],t:[['60','Camas libres','50 limpias','ok'],['0','Pendientes de cama','0 Urgencias + 0 quirófano','ok'],['57','Altas','hoy','ok'],['7','Prealtas','altas previstas','ok'],['31','Ingresos','hoy','ok'],['10','Pend. limpieza','camas libres bloqueadas','bad'],['2','UCI','camas libres · 10 de 12 ocupadas','ok']]},
   cex:{occ:[89,'ok','150 de 168 pacientes · objetivo ≥ 80 %'],t:[['12 min','Tiempo medio de espera','','ok'],['0','Agendas con retraso','en la 1ª atención crítica','ok']]}}};
 const PGN={
  hqs:{
-  ug:{t:[['0','Con triaje > 30 min','esperando 1ª visita','ok'],['4','Sin triaje','máx. 8 min','ok'],['61','En atención','58 S. trat. · 3 H. digital','ok'],['3','Pendientes de ingreso','sin críticos','ok']],a:[]},
-  up:{t:[['0','Con triaje > 30 min','esperando 1ª visita','ok'],['1','Sin triaje','máx. 3 min','ok'],['2','En atención','2 S. trat. · 0 H. digital','ok'],['0','Pendientes de ingreso','sin críticos','ok']],a:[]},
+  u:[{n:'Generales',tot:98,c:[['0','','ok'],['4','máx. 8 min','ok'],['61','58 S. trat. · 3 H. dig.','ok'],['3','sin críticos','ok'],['0','','ok']]},{n:'Pediatría',tot:3,c:[['0','','ok'],['1','máx. 3 min','ok'],['2','2 S. trat. · 0 H. dig.','ok'],['0','sin críticos','ok'],['0','','ok']]},{n:'Ginecología',tot:4,c:[['0','','ok'],['0','','ok'],['3','3 S. trat. · 0 H. dig.','ok'],['0','sin críticos','ok'],['0','','ok']]},{n:'COT',tot:15,c:[['0','','ok'],['2','máx. 6 min','ok'],['11','10 S. trat. · 1 H. dig.','ok'],['1','sin críticos','ok'],['0','','ok']]}],
   qx:{occ:[88,'ok','14 de 16 quirófanos en uso · objetivo ≥ 85 %'],prog:28,fin:14,curso:13,t:[['0','Anulados','de 28 programados','ok'],['1','Urgentes','fuera de programa','ok']],a:[]},
   hos:{occ:[89,'ok','336 de 377 camas operativas · objetivo 85–95 %'],t:[['41','Camas libres','38 limpias','ok'],['9','Pendientes de cama','6 Urgencias + 3 quirófano','ok'],['21','Altas','hoy','ok'],['14','Prealtas','altas previstas','ok'],['20','Ingresos','hoy','ok'],['3','Pend. limpieza','camas libres bloqueadas','ok'],['4','UCI','camas libres · 10 de 14 ocupadas','ok']]},
   cex:{occ:[86,'ok','139 de 162 pacientes · objetivo ≥ 80 %'],t:[['6 min','Tiempo medio de espera','','ok'],['0','Agendas con retraso','en la 1ª atención crítica','ok']]}},
  hugc:{
-  ug:{t:[['0','Con triaje > 30 min','esperando 1ª visita','ok'],['2','Sin triaje','máx. 4 min','ok'],['18','En atención','16 S. trat. · 2 H. digital','ok'],['1','Pendientes de ingreso','sin críticos','ok']],a:[]},
-  up:{t:[['0','Con triaje > 30 min','esperando 1ª visita','ok'],['0','Sin triaje','','ok'],['1','En atención','1 S. trat. · 0 H. digital','ok'],['0','Pendientes de ingreso','sin críticos','ok']],a:[]},
+  u:[{n:'Generales',tot:24,c:[['0','','ok'],['2','máx. 4 min','ok'],['18','16 S. trat. · 2 H. dig.','ok'],['1','sin críticos','ok'],['0','','ok']]},{n:'Pediatría',tot:1,c:[['0','','ok'],['0','','ok'],['1','1 S. trat. · 0 H. dig.','ok'],['0','sin críticos','ok'],['0','','ok']]},{n:'Ginecología',tot:3,c:[['0','','ok'],['1','máx. 3 min','ok'],['2','2 S. trat. · 0 H. dig.','ok'],['0','sin críticos','ok'],['0','','ok']]},{n:'COT',tot:11,c:[['0','','ok'],['1','máx. 5 min','ok'],['9','8 S. trat. · 1 H. dig.','ok'],['1','sin críticos','ok'],['0','','ok']]}],
   qx:{occ:[90,'ok','9 de 10 quirófanos en uso · objetivo ≥ 85 %'],prog:20,fin:9,curso:9,t:[['0','Anulados','de 20 programados','ok'],['1','Urgentes','fuera de programa','ok']],a:[]},
   hos:{occ:[88,'ok','285 de 324 camas operativas · objetivo 85–95 %'],t:[['39','Camas libres','35 limpias','ok'],['4','Pendientes de cama','3 Urgencias + 1 quirófano','ok'],['40','Altas','hoy','ok'],['12','Prealtas','altas previstas','ok'],['28','Ingresos','hoy','ok'],['4','Pend. limpieza','camas libres bloqueadas','ok'],['3','UCI','camas libres · 9 de 12 ocupadas','ok']]},
   cex:{occ:[91,'ok','153 de 168 pacientes · objetivo ≥ 80 %'],t:[['7 min','Tiempo medio de espera','','ok'],['0','Agendas con retraso','en la 1ª atención crítica','ok']]}}};
@@ -2004,14 +2011,22 @@ function gpAlerts(a,okTxt){if(!a||!a.length)return okTxt?'<p class="gpok">'+okTx
   return '<div class="gpal"><span class="gpal-t">En alerta</span>'+a.map(x=>'<div class="gpa '+x[3]+'"><i aria-hidden="true">!</i><b>'+x[0]+'</b><span><strong>'+x[1]+'</strong><small>'+x[2]+'</small></span></div>').join('')+'</div>'}
 function gpCard(h,gc,oa,name,icon,c,body,wide){if(body==null)return '';const st=gpCardSt(c);
   return '<article class="gcard3 gpc'+(wide?' wide':'')+'" data-gc="'+gc+'" data-gop="#/'+h+'/'+oa+'" tabindex="0" role="link" aria-label="'+name+': '+GPST[st]+'. Ver detalle">'+
-   '<header>'+icon+'<div><h3>'+name+'</h3></div><span class="health '+st+'">'+GPST[st]+'</span></header><div class="gpb">'+body+'</div><span class="gpgo">Ver detalle ›</span></article>'}
+   '<header>'+icon+'<div><h3>'+name+'</h3></div><span class="health '+st+'">'+GPST[st]+'</span></header><div class="gpb">'+body+'</div></article>'}
 function renderGP(){const h=GH||HSP,el=$('#lvlG'),P=(GPDEMO==='normal'?PGN:PG)[h],F=GPF==='alert';
-  const keys=['ug','up','qx','hos','cex'],all=[];keys.forEach(k=>{const c=P[k];(c.t||[]).forEach(x=>all.push(x[3]));(c.a||[]).forEach(x=>all.push(x[3]));if(c.occ)all.push(c.occ[1])});
+  const keys=['qx','hos','cex'],all=[];P.u.forEach(x=>x.c.forEach(k=>all.push(k[2])));keys.forEach(k=>{const c=P[k];(c.t||[]).forEach(x=>all.push(x[3]));(c.a||[]).forEach(x=>all.push(x[3]));if(c.occ)all.push(c.occ[1])});
   const nb=all.filter(x=>x==='bad').length,nw=all.filter(x=>x==='warn').length;
   const sum=nb||nw?(nb?nb+(nb===1?' indicador fuera de objetivo':' indicadores fuera de objetivo'):'')+(nb&&nw?' y ':'')+(nw?nw+' en riesgo':'')+' en '+H[h].name:'Sin alertas: todos los ámbitos en objetivo en '+H[h].name;
   const T=ts=>F?ts.filter(x=>x[3]!=='ok'):ts;
   const tiles=(ts,cls)=>{const v=T(ts);return v.length?'<div class="gpt'+(cls||'')+'">'+v.map(gpTile).join('')+'</div>':''};
-  const urg=(k,name,icon)=>{const c=P[k],body=tiles(c.t)+gpAlerts(c.a,F?'':'Sin pruebas en alerta');return gpCard(h,k,'urg',name,icon,c,F&&!body?null:body)};
+  const UL=['Con triaje > 30 min','Sin triaje','En atención','Pendientes de ingreso','Pruebas en alerta'];
+  const ust=x=>gpWorst(x.c.map(k=>k[2]));
+  const U={c:{t:[].concat(...P.u.map(x=>x.c.map(k=>[0,0,0,k[2]])))}};
+  let us=P.u.map((x,i)=>i);if(F)us=us.filter(i=>ust(P.u[i])!=='ok');
+  const hasPru=us.some(i=>P.u[i].c[4][2]!=='ok');
+  let rows=[0,1,2,3].concat(hasPru?[4]:[]);if(F)rows=rows.filter(r=>us.some(i=>P.u[i].c[r][2]!=='ok'));
+  const ubody=us.length&&rows.length?'<div class="gpu"><div class="gpu-t" style="--n:'+us.length+'" role="table" aria-label="Urgencias por unidad"><div class="gpu-r gpu-h" role="row"><span role="columnheader"></span>'+us.map(i=>'<div role="columnheader" class="'+ust(P.u[i])+'"><b>'+P.u[i].n+'</b><small>'+P.u[i].tot+' pacientes</small></div>').join('')+'</div>'+
+    rows.map(r=>'<div class="gpu-r" role="row"><span role="rowheader">'+UL[r]+'</span>'+us.map(i=>{const k=P.u[i].c[r];return '<div role="cell" class="gpu-c '+k[2]+'"><b>'+k[0]+'</b>'+(k[1]?'<small>'+k[1]+'</small>':'')+'</div>'}).join('')+'</div>').join('')+'</div></div>'+(!hasPru&&!F?'<p class="gpok">Sin pruebas en alerta en ninguna unidad</p>':''):'';
+  const urgCard=gpCard(h,'ug','urg','Urgencias',ICON.urg,U.c,F&&!ubody?null:ubody,true);
   const q=P.qx,pend=q.prog-q.fin-q.curso;
   const qbody=((!F||q.occ[1]!=='ok')?gpOcc(q.occ,'% ocupación de quirófanos'):'')+
     (F?'':'<div class="gpprog"><div class="gpprog-h"><b>'+q.fin+'/'+q.prog+'</b><span>finalizadas de las programadas</span></div><i class="gpseg"><em style="width:'+(q.fin/q.prog*100).toFixed(1)+'%"></em><u style="width:'+(q.curso/q.prog*100).toFixed(1)+'%"></u></i>'+
@@ -2022,12 +2037,15 @@ function renderGP(){const h=GH||HSP,el=$('#lvlG'),P=(GPDEMO==='normal'?PGN:PG)[h
   const hos=gpCard(h,'hos','hosp','Hospitalización',ICON.hosp,hs,hcells?'<div class="gpt gpt4">'+hcells+'</div>':(F?null:''),true);
   const cx=P.cex,cbody=((!F||cx.occ[1]!=='ok')?gpOcc(cx.occ,'% atendidos en &lt; 15 min'):'')+tiles(cx.t);
   const cex=gpCard(h,'cex','ce','Consultas Externas',ICON.ce,cx,F&&!cbody?null:cbody);
-  const cards=urg('ug','Urgencias adultos',ICON.urg)+urg('up','Urgencias pediátricas',GICON.up)+qx+hos+cex;
+  const cards=urgCard+qx+hos+cex;
   const fsw='<div class="gvsw" role="group" aria-label="Filtro de indicadores"><button data-gpf="all" aria-pressed="'+!F+'">Ver todo</button><button data-gpf="alert" aria-pressed="'+F+'">Solo alertas</button></div>';
   el.innerHTML='<div class="l1head"><div><h2>Panel de Gerencia, '+H[h].full+'</h2></div>'+gvSwitch()+fsw+(GPDEMO?'<span class="gpdemo">Demostración: escenario '+(GPDEMO==='normal'?'sin alertas':'con alertas')+'</span>':'')+'<span class="stamp" id="stampG">'+new Date().toLocaleString('es-ES',{day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'})+'</span></div>'+
    '<div class="gpsum '+(nb?'bad':nw?'warn':'ok')+'"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l9 16H3z"/><path d="M12 10v4"/><path d="M12 17.5v.01"/></svg><span>'+sum+'</span></div>'+
    (cards?'<div class="gpgrid'+(F?' solo':'')+'">'+cards+'</div>':'<div class="gpempty"><b>Nada que atender ahora mismo</b><span>Todos los indicadores están en objetivo. Pulsa “Ver todo” para ver el detalle de cada ámbito.</span></div>')+
-   '<p class="g3hint">Rojo: fuera de objetivo · Ámbar: riesgo · Sin color: en objetivo. '+(F?'Mostrando solo lo que está fuera de objetivo o en riesgo.':'Los indicadores condicionales solo aparecen cuando están en alerta.')+' Pasa el cursor por una tarjeta para ver el desglose.</p>'}
+   '<p class="g3hint">Rojo: fuera de objetivo · Ámbar: riesgo · Sin color: en objetivo. '+(F?'Mostrando solo lo que está fuera de objetivo o en riesgo.':'Los indicadores condicionales solo aparecen cuando están en alerta.')+' Pasa el cursor por una tarjeta para ver el desglose.</p>';requestAnimationFrame(gpFit)}
+function gpFit(){const el=$('#lvlG');if(!el)return;el.style.zoom='';if(LV!=='g'||document.body.classList.contains('wall')||innerWidth<1000)return;
+  const r=el.getBoundingClientRect(),avail=innerHeight-r.top-10;if(r.height>avail){el.style.zoom=Math.max(.7,avail/r.height).toFixed(3)}}
+window.addEventListener('resize',()=>{clearTimeout(window.__gpft);window.__gpft=setTimeout(gpFit,120)});
 document.addEventListener('click',e=>{const b=e.target.closest('[data-gpf]');if(!b)return;GPF=b.dataset.gpf;try{localStorage.setItem('gpf',GPF)}catch(x){}renderGP()});
 let GH=null;
 function renderGer(){if(GV==='res'){renderGP();return}if(GV==='bi'){renderBI();return}if(GV==='cm'){renderCM();return}const keep=gpFor&&gpFor.dataset.gc;const h=GH||HSP,el=$('#lvlG'),cards=GD[h],sts=cards.map(gCardSt);
